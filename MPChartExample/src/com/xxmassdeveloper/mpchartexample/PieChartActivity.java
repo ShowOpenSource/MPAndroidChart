@@ -1,8 +1,11 @@
 
 package com.xxmassdeveloper.mpchartexample;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -17,17 +20,17 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.charts.CustomPieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.Legend.LegendPosition;
+import com.github.mikephil.charting.data.CustomPieData;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
@@ -35,7 +38,7 @@ import java.util.ArrayList;
 public class PieChartActivity extends DemoBase implements OnSeekBarChangeListener,
         OnChartValueSelectedListener {
 
-    private PieChart mChart;
+    private CustomPieChart mChart;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
     
@@ -59,7 +62,7 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         mSeekBarX.setOnSeekBarChangeListener(this);
         mSeekBarY.setOnSeekBarChangeListener(this);
 
-        mChart = (PieChart) findViewById(R.id.chart1);
+        mChart = (CustomPieChart) findViewById(R.id.chart1);
         mChart.setUsePercentValues(true);
         mChart.setDescription("");
         mChart.setExtraOffsets(5, 10, 5, 5);
@@ -191,7 +194,22 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
             yVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
         }
 
-        ArrayList<String> xVals = new ArrayList<String>();
+        ArrayList<Bitmap> xVals = new ArrayList<Bitmap>();
+
+        Resources res = getResources();
+        BitmapDrawable bd = (BitmapDrawable)res.getDrawable(R.drawable.ic_launcher);
+        Bitmap bit = bd.getBitmap();
+        BitmapDrawable bd2 = (BitmapDrawable)res.getDrawable(R.drawable.marker);
+        Bitmap bit2 = bd2.getBitmap();
+
+        Bitmap[] mParties = new Bitmap[] {
+                bit,bit2,
+                bit,bit2,
+                bit,bit2,
+                bit,bit2,
+                bit,bit2,
+                bit,bit2
+        };
 
         for (int i = 0; i < count + 1; i++)
             xVals.add(mParties[i % mParties.length]);
@@ -224,7 +242,7 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         dataSet.setColors(colors);
         //dataSet.setSelectionShift(0f);
 
-        PieData data = new PieData(xVals, dataSet);
+        CustomPieData data = new CustomPieData(xVals, dataSet);
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
@@ -232,7 +250,7 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         mChart.setData(data);
 
         // undo all highlights
-        mChart.highlightValues(null);
+//        mChart.highlightValues(null);
 
         mChart.invalidate();
     }

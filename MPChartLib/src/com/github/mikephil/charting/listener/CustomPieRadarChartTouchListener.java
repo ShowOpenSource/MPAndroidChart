@@ -1,3 +1,4 @@
+/*
 
 package com.github.mikephil.charting.listener;
 
@@ -7,9 +8,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.charts.PieRadarChartBase;
-import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.charts.CustomPieChart;
+import com.github.mikephil.charting.charts.CustomPieRadarChartBase;
+import com.github.mikephil.charting.charts.CustomRadarChart;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.SelectionDetail;
 import com.github.mikephil.charting.utils.Utils;
@@ -17,18 +18,22 @@ import com.github.mikephil.charting.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Touchlistener for the PieChart.
  *
  * @author Philipp Jahoda
- */
-public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChartBase<?>> {
+ *//*
+
+public class CustomPieRadarChartTouchListener extends ChartTouchListener<CustomPieRadarChartBase<?>> {
 
     private PointF mTouchStartPoint = new PointF();
 
-    /**
+    */
+/**
      * the angle where the dragging started
-     */
+     *//*
+
     private float mStartAngle = 0f;
 
     private ArrayList<AngularVelocitySample> _velocitySamples = new ArrayList<AngularVelocitySample>();
@@ -115,7 +120,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
         return true;
     }
 
-    public PieRadarChartTouchListener(PieRadarChartBase<?> chart) {
+    public CustomPieRadarChartTouchListener(CustomPieRadarChartBase<?> chart) {
         super(chart);
     }
 
@@ -169,7 +174,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
 
             float angle = mChart.getAngleForPoint(e.getX(), e.getY());
 
-            if (mChart instanceof PieChart) {
+            if (mChart instanceof CustomPieChart) {
                 angle /= mChart.getAnimator().getPhaseY();
             }
 
@@ -190,10 +195,10 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
                 // get the dataset that is closest to the selection (PieChart
                 // only
                 // has one DataSet)
-                if (mChart instanceof RadarChart) {
+                if (mChart instanceof CustomRadarChart) {
 
                     dataSetIndex = Utils.getClosestDataSetIndex(valsAtIndex, distance
-                            / ((RadarChart) mChart).getFactor(), null);
+                            / ((CustomRadarChart) mChart).getFactor(), null);
                 }
 
                 if (dataSetIndex < 0) {
@@ -279,31 +284,37 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
         return velocity;
     }
 
-    /**
+    */
+/**
      * sets the starting angle of the rotation, this is only used by the touch
      * listener, x and y is the touch position
      *
      * @param x
      * @param y
-     */
+     *//*
+
     public void setGestureStartAngle(float x, float y) {
         mStartAngle = mChart.getAngleForPoint(x, y) - mChart.getRawRotationAngle();
     }
 
-    /**
+    */
+/**
      * updates the view rotation depending on the given touch position, also
      * takes the starting angle into consideration
      *
      * @param x
      * @param y
-     */
+     *//*
+
     public void updateGestureRotation(float x, float y) {
         mChart.setRotationAngle(mChart.getAngleForPoint(x, y) - mStartAngle);
     }
 
-    /**
+    */
+/**
      * Sets the deceleration-angular-velocity to 0f
-     */
+     *//*
+
     public void stopDeceleration() {
         mDecelerationAngularVelocity = 0.f;
     }
@@ -340,3 +351,4 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
         }
     }
 }
+*/
