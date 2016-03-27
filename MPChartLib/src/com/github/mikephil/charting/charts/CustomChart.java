@@ -41,6 +41,7 @@ import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.renderer.CustomDataRenderer;
 import com.github.mikephil.charting.renderer.DataRenderer;
 import com.github.mikephil.charting.renderer.LegendRenderer;
 import com.github.mikephil.charting.utils.Utils;
@@ -160,9 +161,9 @@ public abstract class CustomChart<T extends CustomChartData<? extends IDataSet<?
     protected LegendRenderer mLegendRenderer;
 
     /**
-     * object responsible for rendering the data
+     *Custom object responsible for rendering the data
      */
-    protected DataRenderer mRenderer;
+    protected CustomDataRenderer mRenderer;
 
     protected ChartHighlighter mHighlighter;
 

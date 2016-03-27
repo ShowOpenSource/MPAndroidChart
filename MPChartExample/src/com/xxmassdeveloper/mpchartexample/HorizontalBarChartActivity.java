@@ -2,9 +2,12 @@
 package com.xxmassdeveloper.mpchartexample;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,12 +27,11 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.CustomBarData;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.filter.Approximator;
-import com.github.mikephil.charting.data.filter.Approximator.ApproximatorType;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
@@ -228,10 +230,25 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
     private void setData(int count, float range) {
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-        ArrayList<String> xVals = new ArrayList<String>();
+        ArrayList<Bitmap> xVals = new ArrayList<Bitmap>();
+
+        Resources res = getResources();
+        BitmapDrawable bd = (BitmapDrawable)res.getDrawable(R.drawable.ic_launcher);
+        Bitmap bit = bd.getBitmap();
+        BitmapDrawable bd2 = (BitmapDrawable)res.getDrawable(R.drawable.marker);
+        Bitmap bit2 = bd2.getBitmap();
+
+        Bitmap[] mParties = new Bitmap[] {
+                bit,bit2,
+                bit,bit2,
+                bit,bit2,
+                bit,bit2,
+                bit,bit2,
+                bit,bit2
+        };
 
         for (int i = 0; i < count; i++) {
-            xVals.add(mMonths[i % 12]);
+            xVals.add(mParties[i % mParties.length]);
             yVals1.add(new BarEntry((float) (Math.random() * range), i));
         }
 
@@ -240,7 +257,7 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
         dataSets.add(set1);
 
-        BarData data = new BarData(xVals, dataSets);
+        CustomBarData data = new CustomBarData(xVals, dataSets);
         data.setValueTextSize(10f);
         data.setValueTypeface(tf);
 
